@@ -4,7 +4,7 @@
             <h2 id="title">Todo List</h2>
             <add-item-form />
         </div>
-        <list-view :items="items"/>
+        <list-view :items="items" />
     </div>
 </template>
 
@@ -20,28 +20,30 @@ export default {
     },
     data: function () {
         return {
-            items: []
-        }
+            items: [],
+        };
     },
-    methods :{
+    methods: {
         getList() {
-            axios.get('api/items')
-            .then(Response => {
-                this.items = response.data
-            })
-            .catch(error => {
-                console.log(error);
-            })
-        }
+            axios
+                .get("api/item")
+                .then((Response) => {
+                    if (Response.status == 200) {
+                        this.items = response.data;
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
     },
-    created(){
+    created() {
         this.getList();
-    }
+    },
 };
 </script>
 
 <style scoped>
-
 .todoListContainer {
     width: 550px;
     margin: auto;
