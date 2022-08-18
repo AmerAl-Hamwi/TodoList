@@ -41,8 +41,9 @@ export default {
 </script>
 
 <style scoped>
+
 .todoListContainer {
-    width: 350px;
+    width: 550px;
     margin: auto;
 }
 
