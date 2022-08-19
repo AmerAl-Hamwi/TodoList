@@ -7,7 +7,7 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
 use App\Http\Traits\ApiResponse;
 
-class ItemStoreRequest extends FormRequest
+class ItemRequest extends FormRequest
 {
     use ApiResponse;
     /**

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ItemStoreRequest;
+use App\Http\Requests\ItemRequest;
 use App\Models\Item;
 use Illuminate\Http\Request;
 use App\Http\Traits\ApiResponse;
+use phpDocumentor\Reflection\Types\Null_;
 
 class ItemController extends Controller
 {
@@ -27,23 +28,12 @@ class ItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ItemStoreRequest $request)
+    public function store(ItemRequest $request)
     {
         $item = Item::create([
             'name' => $request->name,
         ]);
         return $this->apiResponse($item, 201, 'Created');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -53,9 +43,16 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ItemRequest $request, $id)
     {
-        //
+        $item = Item::find($id);
+        if (!$item) {
+            return $this->apiResponse(null, 404, 'Not Found');
+        }
+        $item->update([
+            'name' => $request->name,
+        ]);
+        return $this->apiResponse($item, 200, 'OK');
     }
 
     /**
@@ -66,6 +63,11 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Item::find($id);
+        if (!$item) {
+            return $this->apiResponse(null, 404, 'Not Found');
+        }
+        $item->delete();
+        return $this->apiResponse(null, 200, 'OK');
     }
 }

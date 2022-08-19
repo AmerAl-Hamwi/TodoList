@@ -19,4 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('item', ItemController::class)->only(['index', 'store']);
+Route::apiResource('item', ItemController::class)->except(['show']);
