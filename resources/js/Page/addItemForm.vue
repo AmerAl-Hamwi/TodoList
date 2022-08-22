@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
     data: function () {
@@ -21,28 +21,28 @@ export default {
             },
         };
     },
-    methods :{
+    methods: {
         addItem() {
-            if(this.item.name=='')
-            {
+            if (this.item.name == "") {
                 return;
             }
 
-            axios.post('api/item/store', {
-                item: this.item
-            })
+            axios
+                .post("api/item", {
+                    name: this.item.name,
+                })
 
-            .then (Response => {
-                if(Response.status == 201){
-                    this.item.name == "";
-                }
-            })
+                .then((Response) => {
+                    if (Response.data.status == 201) {
+                        this.item.name == "";
+                    }
+                })
 
-            .catch( error => {
-                console.log( error );
-            })
-        }
-    }
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+    },
 };
 </script>
 

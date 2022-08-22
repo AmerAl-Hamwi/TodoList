@@ -28,8 +28,8 @@ export default {
             axios
                 .get("api/item")
                 .then((Response) => {
-                    if (Response.status == 200) {
-                        this.items = response.data;
+                    if (Response.data.status == 200) {
+                        this.items = Response.data.data;
                     }
                 })
                 .catch((error) => {
